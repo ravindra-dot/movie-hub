@@ -8,8 +8,9 @@
 </head>
 <body>
   <header class="hero">
-    <h1>CineSuggest</h1>
+    <h1>Movie-Hub</h1>
     <p>Discover Movies You'll Love</p>
+    <input type="text" id="search" placeholder="Search Movies...">
   </header>
 
   <div class="filters">
@@ -22,65 +23,9 @@
       <option value="romance">Romance</option>
     </select>
   </div>
-
-  <section class="movie-container">
-    <div class="movie-item-action">
-      <img src="https://play-lh.googleusercontent.com/buKf27Hxendp3tLNpNtP3E-amP0o4yYV-SGKyS2u-Y3GdGRTyfNCIT5WAVs2OudOz6so5K1jtYdAUKI9nw8" alt="Inception Poster">
-      <h2>Inception</h2>
-      <p>Dreams within dreams — a sci-fi thriller by Christopher Nolan.</p>
-      <span class="rating">⭐ 8.8/10</span>
-    </div>
-
-    <div class="movie-item-comedy">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnv6T_7pTW0j-0yOxKO8pKUPb8CKpUSPFbcg&s" alt="3 Idiots Poster">
-      <h2>3 Idiots</h2>
-      <p>College life, friendship & laughter with a message.</p>
-      <span class="rating">⭐ 8.4/10</span>
-    </div>
-
-    <div class="movie-item-drama">
-      <img src="https://i.scdn.co/image/ab67616d0000b273e710c1f5b228046932790031" alt="The Shawshank Redemption">
-      <h2>The Shawshank Redemption</h2>
-      <p>A powerful story of hope and friendship.</p>
-      <span class="rating">⭐ 9.3/10</span>
-    </div>
-
-    <div class="movie-item-action">
-      <img src="https://m.media-amazon.com/images/S/pv-target-images/e9a43e647b2ca70e75a3c0af046c4dfdcd712380889779cbdc2c57d94ab63902.jpg" alt="The Dark Knight">
-      <h2>The Dark Knight</h2>
-      <p>The iconic battle between Batman and the Joker.</p>
-      <span class="rating">⭐ 9.0/10</span>
-    </div>
-
-    <div class="movie-item-romance">
-      <img src="https://m.media-amazon.com/images/M/MV5BNTI1MDgyMmEtNDBmYy00ODJjLWI2ODUtNjMzZWM2ODZlODJhXkEyXkFqcGc@._V1_.jpg" alt="Laal Singh Chaddha">
-      <h2>Laal Singh Chaddha</h2>
-      <p>An emotional journey through life, love, and destiny.</p>
-      <span class="rating">⭐ 7.2/10</span>
-    </div>
-
-    <div class="movie-item-sci-fi">
-      <img src="https://m.media-amazon.com/images/I/91vIHsL-zjL._AC_UF1000,1000_QL80_.jpg" alt="Interstellar">
-      <h2>Interstellar</h2>
-      <p>Exploring space, time, and love beyond galaxies.</p>
-      <span class="rating">⭐ 8.6/10</span>
-    </div>
-
-    <div class="movie-item-comedy">
-      <img src="https://m.media-amazon.com/images/M/MV5BYmEyMmYyOTgtM2I0My00M2QyLWJhYTYtNmNhOGYzMzQwMjVhXkEyXkFqcGc@._V1_.jpg" alt="Jab We Met">
-      <h2>Jab We Met</h2>
-      <p>A cheerful romantic comedy full of heart and humor.</p>
-      <span class="rating">⭐ 7.9/10</span>
-    </div>
-
-    <div class="movie-item-drama">
-      <img src="https://m.media-amazon.com/images/M/MV5BYjk1Y2U4MjQtY2ZiNS00OWQyLWI3MmYtZWUwNmRjYWRiNWNhXkEyXkFqcGc@._V1_.jpg" alt="Parasite">
-      <h2>Parasite</h2>
-      <p>A dark satire on class and society – Oscar Winner.</p>
-      <span class="rating">⭐ 8.6/10</span>
-    </div>
+  <section class="movies">
+    <main id="movie-list"></main>
   </section>
-
   <section class="featured-movie">
     <img src="https://m.media-amazon.com/images/M/MV5BZjhkNjM0ZTMtNGM5MC00ZTQ3LTk3YmYtZTkzYzdiNWE0ZTA2XkEyXkFqcGc@._V1_.jpg" alt="Featured Movie">
     <div class="featured-info">

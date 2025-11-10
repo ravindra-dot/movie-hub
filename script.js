@@ -1,33 +1,118 @@
-// Genre Filter
-const genreSelect = document.getElementById('genreFilter');
-const actionMovies = document.querySelectorAll('.movie-item-action');
-const comedyMovies = document.querySelectorAll('.movie-item-comedy');
-const dramaMovies = document.querySelectorAll('.movie-item-drama');
-const romanceMovies = document.querySelectorAll('.movie-item-romance');
-const sciFiMovies = document.querySelectorAll('.movie-item-sci-fi');
+let movies = [];
 
-genreSelect.addEventListener('change', function () {
-  const choice = genreSelect.value;
+document.addEventListener("DOMContentLoaded", () => {
+  const movieList = document.getElementById("movie-list");
+  const searchInput = document.getElementById("search");
+  const genreSelect = document.getElementById("genreFilter");
 
-  const allMovies = document.querySelectorAll('.movie-container > div');
-  allMovies.forEach(item => item.style.display = 'none');
+  // Load movie data
+  fetch("data/top250_min.json")
+    .then(res => {
+      if (!res.ok) throw new Error("Failed to load movie data");
+      return res.json();
+    })
+    .then(data => {
+      movies = data.sort((a, b) => b.rating - a.rating);
+      const randomMovies = getRandomMovies(movies, 10);
+      displayMovies(randomMovies);
+    })
+    .catch(err => {
+      console.error(err);
+      movieList.innerHTML = `<p style="color:white;">Failed to load movies</p>`;
+    });
 
-  if (choice === 'all') {
-    allMovies.forEach(item => item.style.display = 'block');
-  } else {
-    document.querySelectorAll(`.movie-item-${choice}`).forEach(item => item.style.display = 'block');
-  }
+  // Search and filter
+  searchInput.addEventListener("input", searchMovies);
+  genreSelect.addEventListener("change", filterByGenre);
+
+  // Register form
+  document.getElementById("regForm").addEventListener("submit", handleFormSubmit);
 });
 
-// Form submission handling
-document.getElementById("regForm").addEventListener("submit", function (e) {
-  e.preventDefault(); // Prevent form reload
+// ---------- Display All Movies ----------
+function displayMovies(list) {
+  const container = document.getElementById("movie-list");
+  container.innerHTML = "";
+
+  if (list.length === 0) {
+    container.innerHTML = `<p style="color:white;">No movies found</p>`;
+    return;
+  }
+
+  list.forEach(movie => {
+    const card = document.createElement("div");
+    card.className = "movie-card";
+
+    // Add genre-based class (for filtering)
+    if (movie.genre && movie.genre.length) {
+      card.classList.add(`movie-item-${movie.genre[0].toLowerCase()}`);
+    }
+
+    const poster = movie.thumb_url || "https://via.placeholder.com/200x300?text=No+Image";
+    const genre = movie.genre?.join(", ") || "Unknown";
+    const rating = movie.rating || "N/A";
+
+    card.innerHTML = `
+      <img src="${poster}" alt="${movie.name}">
+      <div class="movie-info">
+        <h3 title="${movie.name}">${movie.name} (${movie.year})</h3>
+        <p>⭐ ${rating}</p>
+        <p>${genre}</p>
+      </div>
+      <div class="movie-footer">
+        <a href="details.html?id=${encodeURIComponent(movie.imdb_url)}">
+          <button>Details</button>
+        </a>
+      </div>
+    `;
+
+    container.appendChild(card);
+  });
+
+  removeBrokenPosters();
+}
+// ---------- Get Random Movies ----------
+function getRandomMovies(arr, count) {
+  const shuffled = arr.slice().sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, count);
+}
+
+// ---------- Search ----------
+function searchMovies() {
+  const query = document.getElementById("search").value.toLowerCase();
+
+  const filtered = movies.filter(m =>
+    m.name.toLowerCase().includes(query) ||
+    (m.genre && m.genre.join(",").toLowerCase().includes(query)) ||
+    (m.actors && m.actors.join(",").toLowerCase().includes(query))
+  );
+
+  displayMovies(filtered);
+}
+
+// ---------- Genre Filter ----------
+function filterByGenre() {
+  const choice = document.getElementById("genreFilter").value;
+
+  if (choice === "all") {
+    displayMovies(movies);
+  } else {
+    const filtered = movies.filter(m =>
+      m.genre && m.genre.some(g => g.toLowerCase() === choice)
+    );
+    displayMovies(filtered);
+  }
+}
+
+// ---------- Form Submission ----------
+function handleFormSubmit(e) {
+  e.preventDefault();
 
   const name = document.getElementById("name").value.trim();
   const email = document.getElementById("email").value.trim();
   const phone = document.getElementById("phone").value.trim();
 
-  if (name === "" || email === "" || phone === "") {
+  if (!name || !email || !phone) {
     alert("Please fill in all fields.");
     return;
   }
@@ -44,6 +129,16 @@ document.getElementById("regForm").addEventListener("submit", function (e) {
     return;
   }
 
-  alert(`hank you, ${name}! You’ve successfully registered for the movie event.`);
+  alert(`Thank you, ${name}! You’ve successfully registered for the movie event.`);
   document.getElementById("regForm").reset();
-});
+}
+
+// ---------- Remove Broken Posters ----------
+function removeBrokenPosters() {
+  document.querySelectorAll("img").forEach(img => {
+    img.addEventListener("error", () => {
+      const card = img.closest(".movie-card");
+      if (card) card.remove();
+    });
+  });
+}
