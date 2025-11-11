@@ -15,10 +15,8 @@ document.addEventListener("DOMContentLoaded", () => {
     })
     .then(data => {
       movies = data.sort((a, b) => b.rating - a.rating);
-
-      // show random 10 movies initially
-      initialDisplay = getRandomMovies(movies, 10);
-      displayMovies(initialDisplay);
+      const randomMovies = getRandomMovies(movies, 8);
+      displayMovies(randomMovies);
     })
     .catch(err => {
       console.error(err);
