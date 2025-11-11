@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movie Details</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+/* Movie Details Page (matching main theme) */
+body {
+  font-family: Poppins, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background-color: #f5f5f5;
+  color: #222;
+}
+
+/* Back Button */
+.back-btn {
+  display: inline-block;
+  margin-bottom: 20px;
+  color: #3e0bf8;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.back-btn:hover {
+  color: #4b39f5;
+}
+
+/* Movie Details Layout */
+.movie-details {
+  max-width: 1000px;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Poster */
+.movie-details img {
+  width: 300px;
+  height: 450px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* Info Section */
+.details-info {
+  flex: 1;
+  min-width: 300px;
+}
+
+.details-info h2 {
+  margin-top: 0;
+  color: #1e3c72;
+  font-size: 1.8rem;
+  border-bottom: 3px solid #f5c518;
+  display: inline-block;
+  padding-bottom: 5px;
+}
+
+.details-info p {
+  line-height: 1.6;
+  color: #444;
+  margin: 8px 0;
+}
+
+/* Trailer Section */
+.trailer {
+  margin-top: 20px;
+}
+
+iframe {
+  width: 100%;
+  height: 400px;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+  .movie-details {
+    flex-direction: column;
+    align-items: center;
+  }
+  .movie-details img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <a href="index.html" class="back-btn">Back</a>
+  <div id="movie-details" class="movie-details"></div>
+
+  <script src="details.js"></script>
+</body>
+</html>

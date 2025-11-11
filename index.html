@@ -8,21 +8,23 @@
 </head>
 <body>
   <header class="hero">
-    <h1>Movie-Hub</h1>
-    <p>Discover Movies You'll Love</p>
-    <input type="text" id="search" placeholder="Search Movies...">
-  </header>
+    <div class="hero-left">
+      <h1>Movie<span>Hub</span></h1>
+      <p>Discover Movies You'll Love</p>
+    </div>
 
-  <div class="filters">
-    <select name="genre" id="genreFilter">
-      <option value="all">All</option>
-      <option value="action">Action</option>
-      <option value="comedy">Comedy</option>
-      <option value="drama">Drama</option>
-      <option value="sci-fi">Sci-Fi</option>
-      <option value="romance">Romance</option>
-    </select>
-  </div>
+    <div class="hero-right">
+      <input type="text" id="search" placeholder="Search movies, shows...">
+      <select name="genre" id="genreFilter">
+        <option value="all">All</option>
+        <option value="action">Action</option>
+        <option value="comedy">Comedy</option>
+        <option value="drama">Drama</option>
+        <option value="sci-fi">Sci-Fi</option>
+        <option value="romance">Romance</option>
+      </select>
+    </div>
+  </header>
   <section class="movies">
     <main id="movie-list"></main>
   </section>
